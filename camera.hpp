@@ -4,6 +4,7 @@
 #include "globals.h"
 #include <allegro5/allegro5.h>
 
+
 /*
 Keeps track of a camera x and y coordinate, allows you to lock it to the player,
 
