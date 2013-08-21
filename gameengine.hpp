@@ -1,5 +1,12 @@
 #pragma once
 
+
+/*
+The Game Engine is the wrapper for all the other systems contained in making the game run. It frees up the entry point of rogue variables and methods that should be put in related classes.
+
+It will handle the init of the game, processing command line arguments, running the main game loop, and the clean up.
+*/
+
 class GameEngine
 {
 
