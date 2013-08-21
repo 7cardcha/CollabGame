@@ -1,5 +1,6 @@
 #pragma once
 
+//Has globals, such as screen width/height. Not too relevant.
 #include "globals.h"
 #include <allegro5/allegro5.h>
 
