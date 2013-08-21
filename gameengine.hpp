@@ -30,7 +30,7 @@ public:
     bool run(void);
 
 private:
-    // TODO (Thorn#1#08/21/13): The event handler, update, and draw routines will all need to be passed a 'this' instance of the game engine. Update will need Delta Time, and draw will need an interpolation.
+    // TODO (Thorn#1#08/21/13): The event handler, update, and draw routines will all need to be passed a 'this' instance of the game engine. Update will need Delta Time, and draw will need an interpolation. Until then, (void)
 
     // Event Handler
     void handleEvents(void);
