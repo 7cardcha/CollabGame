@@ -457,6 +457,18 @@ void Input::updateDown(int keycode)
             }
             break;
 
+        case ALLEGRO_KEY_LCTRL:
+            key[KEY_LCTRL] = true;
+            break;
+        case ALLEGRO_KEY_RCTRL:
+            key[KEY_RCTRL] = true;
+            break;
+        case ALLEGRO_KEY_ALT:
+            key[KEY_ALT] = true;
+            break;
+
+
+
         //End once off keys.
 
         //Function keys.
@@ -711,6 +723,15 @@ void Input::updateUp(int keycode)
             break;
         case ALLEGRO_KEY_BACKSLASH:
             key[KEY_BACKSLASH] = false;
+            break;
+        case ALLEGRO_KEY_LCTRL:
+            key[KEY_LCTRL] = false;
+            break;
+        case ALLEGRO_KEY_RCTRL:
+            key[KEY_RCTRL] = false;
+            break;
+        case ALLEGRO_KEY_ALT:
+            key[KEY_ALT] = false;
             break;
         //End once off.
 
