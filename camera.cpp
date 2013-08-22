@@ -9,7 +9,7 @@ Definitely needs some refinement, for ease of use, just stubbing it.
 */
 
 
-#include "Camera.hpp"
+#include "camera.hpp"
 
 //Constructor for setting the camera coords.
 Camera::Camera(int centerX, int centerY)

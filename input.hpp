@@ -35,6 +35,9 @@ class Input
         //Boolean array for keyboard modifers.
         bool mod[32];
 
+        //For keeping track of caps lock, if we used allegros way of doing it, we'd need another event. No thanks.
+        bool capsToggle;
+
         //String to keep track of the recorded input.
         string recordedInput;
 
@@ -54,11 +57,11 @@ class Input
 
             KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9, KEY_0, //Number keys.
 
-            KEY_PAD_1, KEY_PAD_2, KEY_PAD_3, KEY_PAD_4, KEY_PAD_5, KEY_PAD_6, KEY_PAD_7, KEY_PAD_8, KEY_PAD_9, KEY_PAD_0, //Number pad keys.
-
             KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12,  //Function keys.
 
-            KEY_A, KEY_B, KEY_C, KEY_D, KEY_E, KEY_F, KEY_G, KEY_H, KEY_I, KEY_J, KEY_K, KEY_L, KEY_M, KEY_N, KEY_O, KEY_P, KEY_Q, KEY_R, KEY_S, KEY_T, KEY_U, KEY_V, KEY_W, KEY_X, KEY_Y, KEY_Z //All the letters.
+            KEY_A, KEY_B, KEY_C, KEY_D, KEY_E, KEY_F, KEY_G, KEY_H, KEY_I, KEY_J, KEY_K, KEY_L, KEY_M, KEY_N, KEY_O, KEY_P, KEY_Q, KEY_R, KEY_S, KEY_T, KEY_U, KEY_V, KEY_W, KEY_X, KEY_Y, KEY_Z, //All the letters.
+
+            KEY_SPACE, KEY_BACKSPACE, KEY_ESCAPE, KEY_TILDE, KEY_MINUS, KEY_EQUALS, KEY_TAB, KEY_ENTER, KEY_QUOTE, KEY_COMMA, KEY_PERIOD, KEY_OPENBRACE, KEY_CLOSEBRACE, KEY_SLASH, KEY_BACKSLASH //Once off stuff.
         };
 
 

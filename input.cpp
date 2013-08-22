@@ -1,4 +1,4 @@
-#include "Input.hpp"
+#include "input.hpp"
 
 /*
 Intended to make input more abstract,
@@ -29,9 +29,12 @@ Input::Input()
         mod[i] = false;
     }
 
+    //Just default everything
     recordedInput = "";
 
     recording = false;
+
+    capsToggle = false;
 }
 
 //Hooks into event loop, updates when keys are pressed down.
@@ -41,15 +44,24 @@ void Input::updateDown(int keycode)
     recording ? "" : recordedInput = "";
 
     //Switch the key codes and update the key array.
-
     switch(keycode)
     {
         //Handle modifiers a bit specially.
 
         case ALLEGRO_KEY_CAPSLOCK:
-            key[KEY_CAPSLOCK] = true;
+            if(capsToggle)
+            {
+                key[KEY_CAPSLOCK] = false;
+                mod[MOD_CAPSLOCK] = false;
+            }
+            else
+            {
+                key[KEY_CAPSLOCK] = true;
+                mod[MOD_CAPSLOCK] = true;
+            }
 
-            mod[MOD_CAPSLOCK] = true;
+            capsToggle =! capsToggle;
+
             break;
 
         case ALLEGRO_KEY_LSHIFT:
@@ -269,6 +281,225 @@ void Input::updateDown(int keycode)
             break;
         //End alphabet keys.
 
+        //Number keys below.
+
+        case ALLEGRO_KEY_1:
+            key[KEY_1] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "!" : recordedInput = recordedInput + "1";
+            }
+            break;
+        case ALLEGRO_KEY_2:
+            key[KEY_2] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "@" : recordedInput = recordedInput + "2";
+            }
+            break;
+        case ALLEGRO_KEY_3:
+            key[KEY_3] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "#" : recordedInput = recordedInput + "3";
+            }
+            break;
+        case ALLEGRO_KEY_4:
+            key[KEY_4] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "$" : recordedInput = recordedInput + "4";
+            }
+            break;
+        case ALLEGRO_KEY_5:
+            key[KEY_5] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "%" : recordedInput = recordedInput + "5";
+            }
+            break;
+        case ALLEGRO_KEY_6:
+            key[KEY_6] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "^" : recordedInput = recordedInput + "6";
+            }
+            break;
+        case ALLEGRO_KEY_7:
+            key[KEY_7] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "&" : recordedInput = recordedInput + "7";
+            }
+            break;
+        case ALLEGRO_KEY_8:
+            key[KEY_8] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "*" : recordedInput = recordedInput + "8";
+            }
+            break;
+        case ALLEGRO_KEY_9:
+            key[KEY_9] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "(" : recordedInput = recordedInput + "9";
+            }
+            break;
+        case ALLEGRO_KEY_0:
+            key[KEY_0] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + ")" : recordedInput = recordedInput + "0";
+            }
+            break;
+        //End numbers.
+
+
+        //Once off keys below, input recording where applicable.
+
+        case ALLEGRO_KEY_SPACE:
+            key[KEY_SPACE] = true;
+            if(recording)
+            {
+                recordedInput = recordedInput + " ";
+            }
+            break;
+
+        case ALLEGRO_KEY_BACKSPACE:
+            key[KEY_BACKSPACE] = true;
+            if(recording)
+            {
+                recordedInput.erase(recordedInput.end() - 1);
+            }
+            break;
+        case ALLEGRO_KEY_ESCAPE:
+            key[KEY_ESCAPE] = true;
+            break;
+        case ALLEGRO_KEY_TILDE:
+            key[KEY_TILDE] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "~" : recordedInput = recordedInput + "`";
+            }
+            break;
+        case ALLEGRO_KEY_MINUS:
+            key[KEY_MINUS] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "_" : recordedInput = recordedInput + "-";
+            }
+            break;
+        case ALLEGRO_KEY_EQUALS:
+            key[KEY_EQUALS] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "+" : recordedInput = recordedInput + "=";
+            }
+            break;
+        case ALLEGRO_KEY_TAB:
+            key[KEY_TAB] = true;
+            break;
+        case ALLEGRO_KEY_ENTER:
+            key[KEY_ENTER] = true;
+            if(recording)
+            {
+                recordedInput = recordedInput + "\n";
+            }
+            break;
+        case ALLEGRO_KEY_QUOTE:
+            key[KEY_QUOTE] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "\"" : recordedInput = recordedInput + "'";
+            }
+            break;
+        case ALLEGRO_KEY_COMMA:
+            key[KEY_COMMA] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "<" : recordedInput = recordedInput + ",";
+            }
+            break;
+        case ALLEGRO_KEY_FULLSTOP:
+            key[KEY_PERIOD] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + ">" : recordedInput = recordedInput + ".";
+            }
+            break;
+        case ALLEGRO_KEY_OPENBRACE:
+            key[KEY_OPENBRACE] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "{" : recordedInput = recordedInput + "[";
+            }
+            break;
+        case ALLEGRO_KEY_CLOSEBRACE:
+            key[KEY_CLOSEBRACE] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "}" : recordedInput = recordedInput + "]";
+            }
+            break;
+        case ALLEGRO_KEY_SLASH:
+            key[KEY_SLASH] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "?" : recordedInput = recordedInput + "/";
+            }
+            break;
+        case ALLEGRO_KEY_BACKSLASH:
+            key[KEY_BACKSLASH] = true;
+            if(recording)
+            {
+                mod[MOD_LSHIFT] || mod[MOD_RSHIFT] ? recordedInput = recordedInput + "|" : recordedInput = recordedInput + "\\";
+            }
+            break;
+
+        //End once off keys.
+
+        //Function keys.
+
+        case ALLEGRO_KEY_F1:
+            key[KEY_F1] = true;
+            break;
+        case ALLEGRO_KEY_F2:
+            key[KEY_F2] = true;
+            break;
+        case ALLEGRO_KEY_F3:
+            key[KEY_F3] = true;
+            break;
+        case ALLEGRO_KEY_F4:
+            key[KEY_F4] = true;
+            break;
+        case ALLEGRO_KEY_F5:
+            key[KEY_F5] = true;
+            break;
+        case ALLEGRO_KEY_F6:
+            key[KEY_F6] = true;
+            break;
+        case ALLEGRO_KEY_F7:
+            key[KEY_F7] = true;
+            break;
+        case ALLEGRO_KEY_F8:
+            key[KEY_F8] = true;
+            break;
+        case ALLEGRO_KEY_F9:
+            key[KEY_F9] = true;
+            break;
+        case ALLEGRO_KEY_F10:
+            key[KEY_F10] = true;
+            break;
+        case ALLEGRO_KEY_F11:
+            key[KEY_F11] = true;
+            break;
+        case ALLEGRO_KEY_F12:
+            key[KEY_F12] = true;
+            break;
+
+        //End function keys.
+
 
         default:
             break;
@@ -286,9 +517,7 @@ void Input::updateUp(int keycode)
     {
         //Handle modifiers a bit specially.
         case ALLEGRO_KEY_CAPSLOCK:
-            key[KEY_CAPSLOCK] = false;
-
-            mod[MOD_CAPSLOCK] = false;
+            //stub, do nothing here, all handled above!
             break;
 
         case ALLEGRO_KEY_LSHIFT:
@@ -402,6 +631,128 @@ void Input::updateUp(int keycode)
             break;
 
         //End alphabet keys.
+
+        //Number keys.
+        case ALLEGRO_KEY_1:
+            key[KEY_1] = false;
+            break;
+        case ALLEGRO_KEY_2:
+            key[KEY_2] = false;
+            break;
+        case ALLEGRO_KEY_3:
+            key[KEY_3] = false;
+            break;
+        case ALLEGRO_KEY_4:
+            key[KEY_4] = false;
+            break;
+        case ALLEGRO_KEY_5:
+            key[KEY_5] = false;
+            break;
+        case ALLEGRO_KEY_6:
+            key[KEY_6] = false;
+            break;
+        case ALLEGRO_KEY_7:
+            key[KEY_7] = false;
+            break;
+        case ALLEGRO_KEY_8:
+            key[KEY_8] = false;
+            break;
+        case ALLEGRO_KEY_9:
+            key[KEY_9] = false;
+            break;
+        case ALLEGRO_KEY_0:
+            key[KEY_0] = false;
+            break;
+        //End number keys.
+
+        //Once off keys.
+
+        case ALLEGRO_KEY_SPACE:
+            key[KEY_SPACE] = false;
+            break;
+        case ALLEGRO_KEY_BACKSPACE:
+            key[KEY_BACKSPACE] = false;
+            break;
+        case ALLEGRO_KEY_ESCAPE:
+            key[KEY_ESCAPE] = false;
+            break;
+        case ALLEGRO_KEY_TILDE:
+            key[KEY_TILDE] = false;
+            break;
+        case ALLEGRO_KEY_MINUS:
+            key[KEY_MINUS] = false;
+            break;
+        case ALLEGRO_KEY_EQUALS:
+            key[KEY_EQUALS] = false;
+            break;
+        case ALLEGRO_KEY_TAB:
+            key[KEY_TAB] = false;
+            break;
+        case ALLEGRO_KEY_ENTER:
+            key[KEY_ENTER] = false;
+            break;
+        case ALLEGRO_KEY_QUOTE:
+            key[KEY_QUOTE] = false;
+            break;
+        case ALLEGRO_KEY_COMMA:
+            key[KEY_COMMA] = false;
+            break;
+        case ALLEGRO_KEY_FULLSTOP:
+            key[KEY_PERIOD] = false;
+            break;
+        case ALLEGRO_KEY_OPENBRACE:
+            key[KEY_OPENBRACE] = false;
+            break;
+        case ALLEGRO_KEY_CLOSEBRACE:
+            key[KEY_CLOSEBRACE] = false;
+            break;
+        case ALLEGRO_KEY_SLASH:
+            key[KEY_SLASH] = false;
+            break;
+        case ALLEGRO_KEY_BACKSLASH:
+            key[KEY_BACKSLASH] = false;
+            break;
+        //End once off.
+
+        //Function keys.
+
+        case ALLEGRO_KEY_F1:
+            key[KEY_F1] = false;
+            break;
+        case ALLEGRO_KEY_F2:
+            key[KEY_F2] = false;
+            break;
+        case ALLEGRO_KEY_F3:
+            key[KEY_F3] = false;
+            break;
+        case ALLEGRO_KEY_F4:
+            key[KEY_F4] = false;
+            break;
+        case ALLEGRO_KEY_F5:
+            key[KEY_F5] = false;
+            break;
+        case ALLEGRO_KEY_F6:
+            key[KEY_F6] = false;
+            break;
+        case ALLEGRO_KEY_F7:
+            key[KEY_F7] = false;
+            break;
+        case ALLEGRO_KEY_F8:
+            key[KEY_F8] = false;
+            break;
+        case ALLEGRO_KEY_F9:
+            key[KEY_F9] = false;
+            break;
+        case ALLEGRO_KEY_F10:
+            key[KEY_F10] = false;
+            break;
+        case ALLEGRO_KEY_F11:
+            key[KEY_F11] = false;
+            break;
+        case ALLEGRO_KEY_F12:
+            key[KEY_F12] = false;
+            break;
+        //End function keys.
 
         default:
             break;
